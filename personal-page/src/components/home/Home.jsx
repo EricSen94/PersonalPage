@@ -9,9 +9,6 @@ const Home = () =>{
     return(
         <>
         <div>
-        <p>Auxiliar</p>
-        </div>
-        <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src={ViteLogo} className="logo" alt="Vite logo" />
         </a>

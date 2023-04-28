@@ -5,41 +5,58 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { useNavigate  } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import cheems from '../../assets/cheems.png'
 
-const pages = ['Experience', 'About Me', 'Miscelaneus'];
+const pages = ['Experience', 'About Me', 'Miscelaneus', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
+  const [selectedPage, setPage] = React.useState('')
+  const [navWidth, setWidthNav] = React.useState(null);
+  const [userWidth, setUserWidth] = React.useState(null);
+  const navigateTo = useNavigate()
+  const handleOpenNavMenu = (event) => {
+    setWidthNav(event.currentTarget);
+  };
   const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
+    setUserWidth(event.currentTarget);
   };
 
-  const handleNavElementClick = (page) =>{
-    const navigateTo = useNavigate ()
-    console.log(page)
-    switch (page){
-        case 'Experience':
-            navigateTo("/experience")
-            break;
-    }
-  }
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+  const handleCloseNavMenu = () => {
+    setWidthNav(null);
   };
+
+  const handleCloseUserMenu = () => {
+    setUserWidth(null);
+  };
+
+  React.useEffect(() => {
+    switch (selectedPage) {
+      case 'Experience':
+        navigateTo("/experience")
+        break;
+    }
+    handleCloseNavMenu()
+  }, [selectedPage])
+
+  const setSelectedPage = (page) => {
+    setPage(page)
+  }
+
 
   return (
-    <AppBar sx={{ width: 1}}>
-      <Container sx={{width: 1}}>
-        <Toolbar disableGutters sx={{width:1}}>
-          
+
+    <AppBar sx={{ width: 1 }}>
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
           <Typography
             variant="h6"
             noWrap
@@ -54,16 +71,69 @@ function ResponsiveAppBar() {
               color: 'inherit',
               textDecoration: 'none',
             }}
-            
           >
-            Developer
+            Eric Dev
           </Typography>
-        
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={navWidth}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(navWidth)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: 'block', md: 'none' },
+              }}
+            >
+              {pages.map((page) => (
+                <MenuItem key={page} onClick={setSelectedPage.bind(this, page)}>
+                  <Typography textAlign="center">{page}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+          <Typography
+            variant="h5"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: 'flex', md: 'none' },
+              flexGrow: 1,
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            Eric Dev
+          </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleNavElementClick(page)}
+                onClick={setSelectedPage.bind(this, page)}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
@@ -74,13 +144,13 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Eric Mora" src={cheems} />
               </IconButton>
             </Tooltip>
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
-              anchorEl={anchorElUser}
+              anchorEl={userWidth}
               anchorOrigin={{
                 vertical: 'top',
                 horizontal: 'right',
@@ -90,7 +160,7 @@ function ResponsiveAppBar() {
                 vertical: 'top',
                 horizontal: 'right',
               }}
-              open={Boolean(anchorElUser)}
+              open={Boolean(userWidth)}
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
