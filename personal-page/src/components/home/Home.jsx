@@ -1,34 +1,37 @@
-import React, { useState } from "react"
+import React from "react"
+//css
 import './Home.css'
-import ReactLogo from '../../assets/react.svg'
-import ViteLogo from '../../assets/vite.svg'
-
-const Home = () =>{
-    const [count, setCount] = useState(0)
-
-    return(
-        <>
-        <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={ViteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={ReactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-        </>
-    )
+//Material ui
+import { Avatar, Grid } from '@mui/material';
+//images
+import cheems from '../../assets/cheems.png'
+import { LinkedIn } from "@mui/icons-material";
+const Home = () => {
+  const openLinkedin = () => {
+    window.open('https://www.linkedin.com/in/eric-senen-mora-lopez-esml/', '_blank');
+  }
+  return (
+    <Grid justifyContent="space-evenly"
+      container
+      alignItems="center" >
+      <Grid container spacing={1} className="container">
+        <Grid item xs={12}>
+          <Avatar alt="Eric Mora" src={cheems} sx={{ width: 1, height: 1 }} />
+        </Grid>
+        <Grid item xs={12}>
+          <label className="name">Eric Senén Mora López</label>
+        </Grid>
+        <Grid item xs={12}>
+          <label className="job">Frontend Developer</label>
+        </Grid>
+        <Grid item xs={12}>
+          <label className="subJobs">Web and mobile</label>
+        </Grid>
+        <Grid item xs={12} >
+          <LinkedIn onClick={openLinkedin} sx={{ mt: '20px', fontSize: 30 }} />
+        </Grid>
+      </Grid>
+    </Grid >
+  )
 }
 export default Home

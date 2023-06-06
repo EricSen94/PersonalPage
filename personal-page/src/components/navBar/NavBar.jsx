@@ -43,6 +43,9 @@ function ResponsiveAppBar() {
       case 'Experience':
         navigateTo("/experience")
         break;
+      case 'Home':
+        navigateTo("/home")
+        break;
     }
     handleCloseNavMenu()
   }, [selectedPage])
@@ -61,7 +64,7 @@ function ResponsiveAppBar() {
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            onClick={setSelectedPage.bind(this, 'Home')}
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -115,7 +118,7 @@ function ResponsiveAppBar() {
             variant="h5"
             noWrap
             component="a"
-            href="/"
+            onClick={setSelectedPage.bind(this, 'Home')}
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },

@@ -1,5 +1,5 @@
 import React from "react";
-import ChuckNorrisJoke from "../chuckJokes/ChuckJokes";
+import ChuckNorrisJoke from "./chuckJokes/ChuckJokes";
 
 const Experiences = () => {
   return (

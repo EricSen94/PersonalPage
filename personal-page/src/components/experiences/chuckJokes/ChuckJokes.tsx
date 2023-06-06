@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { StoreDispatch, RootState } from "../../store/Store";
-import { fetchJoke } from "../../slices/ChuckSlice";
+import { StoreDispatch, RootState } from "../../../store/Store";
+import { fetchJoke } from "../../../slices/ChuckSlice";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 

@@ -20,3 +20,41 @@
 .navElement{
  margin-left: 5%;
 }
+
+.fade {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.parent-component {
+  position: relative;
+  transition: height 0.3s ease;
+}
+
+.parent-component.show-component2 {
+  height: 0;
+  overflow: hidden;
+}
+.presentation {
+  transition: opacity 1s ease-in-out;
+}
+
+.presentation.fade-in {
+  opacity: 1;
+}
+
+.presentation.fade-out {
+  opacity: 0;
+}
+
+.main {
+  transition: opacity 1s ease-in-out;
+}
+
+.main.fade-in {
+  opacity: 1;
+}
+
+.main.fade-out {
+  opacity: 0;
+}
